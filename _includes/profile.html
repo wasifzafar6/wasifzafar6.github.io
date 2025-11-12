@@ -1,0 +1,10 @@
+{% assign profile = site.data.data.profile %}
+{% if profile %}
+<section class="section summary-section">
+
+    <div class="summary">
+        {{ profile.summary | markdownify }}
+    </div><!--//summary-->
+
+</section><!--//section-->
+{% endif %}

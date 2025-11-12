@@ -1,0 +1,51 @@
+#
+# Be aware that even a small syntax error here can lead to failures in output.
+#
+# https://github.com/yuyq96/yuyq96.github.io
+
+sidebar:
+  # Profile information
+  name: "Muhammad Wasif Zafar"
+  name_legacy: "Muhammad Wasif Zafar"
+  tagline: |
+    **Assistant Professor**
+    [FAST School of Management](https://lhr.nu.edu.pk/){:target="_blank"}
+    [National University of Computer and Emerging Sciences](https://lhr.nu.edu.pk/){:target="_blank"}
+    Lahore, Pakistan
+  tagline_legacy: "<br>[Curriculum Vitae (PDF)](/cv/wasif.pdf){:target=\"_blank\"}"
+  avatar: "profile.png" # place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+
+  # Sidebar links
+  email: "wasif.zafar6@yahoo.com"
+  phone: "+923467568266"
+  website: "wasif-zafar.github.io/" # do not add http://
+  # You can put either your full LinkedIn profile URL or just your username
+  # Examples:
+  # linkedin: https://www.linkedin.com/in/muhammad-wasif-zafar
+  # or
+  # linkedin: muhammad-wasif-zafar
+  linkedin: "https://pk.linkedin.com/in/dr-muhammad-wasif-zafar-8b4073b2"
+  # Use a site-relative path so links work both locally and on GitHub Pages
+  # Set to '/cv/wasif.pdf' (there is a file at cv/wasif.pdf in the repo)
+  cv: "/cv/wasif.pdf"
+  google-scholar: "https://scholar.google.com/citations?user=iaOprEYAAAAJ&hl=en"
+
+  address: |
+    House # 332, B Block, PUEHS
+    Lahore, Punjab, Pakistan
+    Tel: +923467568266
+
+profile:
+  title: "Biography"
+  summary: |
+    I am an **Assistant Professor** at the [FAST School of Management](https://lhr.nu.edu.pk/){:target="_blank"}, [National University of Computer
+    and Emerging Sciences](https://lhr.nu.edu.pk/){:target="_blank"}, Lahore, Pakistan, and also serve as an **Assistant Professor** at the
+    [Riphah School of Business Management](http://www.riphah.edu.pk/){:target="_blank"}, [Riphah International University](http://www.riphah.edu.pk/){:target="_blank"}, Lahore,
+    Pakistan. Previously, I was a **Postdoc Fellow** at the College of Management, [Shenzhen University](http://www.szu.edu.cn/){:target="_blank"}, Shenzhen, China,
+    and a **Lecturer** at the Department of Management Sciences, [COMSATS Institute of Information & Technology](http://www.comsats.edu.pk/){:target="_blank"}, Islamabad,
+    Pakistan.<br><br>I received my **Ph.D. in Management Science and Engineering (Finance and Economics)** from [Beijing Institute of Technology](http://www.bit.edu.cn/){:target="_blank"},
+    China, **M.S. in Management Science (Finance)** from [COMSATS University of Islamabad](http://www.comsats.edu.pk/){:target="_blank"}, Pakistan, and **B.Com (Hon's)** from [The Islamia
+    University of Bahawalpur](http://www.iub.edu.pk/){:target="_blank"}, Bahawalpur, Pakistan.<br><br>My current research includes **Green Finance, Sustainability, Energy Economics,** and
+    **Capital Markets**. I am honored to be included in the **Top 2% Scientists Worldwide 2025** list by Stanford University. I serve as an **Associate Editor** for Environment,
+    Development and Sustainability (IF 4.7).<br><br>**Research Impact Summary:**<br>ORCID ID: [0000-0001-5790-3196](https://orcid.org/0000-0001-5790-3196){:target="_blank"}<br>**Total IF: 470**<br>**Google h-index: 39 (2025)**<br>**Google i10-index: 57 (2025)**<br>**Google Citations: 9,441 (2025)**
+  summary_legacy: ""

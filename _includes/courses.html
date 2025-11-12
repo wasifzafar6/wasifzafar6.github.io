@@ -1,0 +1,51 @@
+{% assign courses = site.data.courses.courses %}
+{% assign courses_limit = 3 %}
+<div class="courses-container container-block">
+
+    <h2 class="container-block-title">
+        Courses
+    </h2>
+
+    <ul class="list-unstyled courses-list">
+        {% if page.courses_show_less %}
+
+            {% for item in courses limit: courses_limit %}
+                {% if item.link %}
+                    <li>
+                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a><br>
+                        {{ item.time }}
+                    </li>
+                {% else %}
+                    <li>
+                        {{ item.title }}<br>
+                        {{ item.time }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if courses.size > courses_limit %}
+                <a href="{{ side.baseurl }}/archive/courses.html">More</a>
+            {% endif %}
+
+        {% else %}
+
+            {% for item in courses %}
+                {% if item.link %}
+                    <li>
+                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a><br>
+                        {{ item.time }}
+                    </li>
+                {% else %}
+                    <li>
+                        {{ item.title }}<br>
+                        {{ item.time }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <a href="{{ side.baseurl }}/index.html">Less</a>
+
+        {% endif %}
+    </ul>
+
+</div><!--//courses-container-->

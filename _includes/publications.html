@@ -1,0 +1,163 @@
+{% comment %} Collect publication objects into an array and sort by their internal 'key' (e.g. pub-2025-000) so we can order by year descending. {% endcomment %}
+{% assign pubs_array = "" | split: "" %}
+{% for paper_hash in site.data.publications %}
+    {% assign paper = paper_hash[1] %}
+    {% assign pubs_array = pubs_array | push: paper %}
+{% endfor %}
+{% assign publications = pubs_array | sort: 'key' | reverse %}
+{% assign my_name = site.data.data.sidebar.name %}
+{% assign my_name_legacy = site.data.data.sidebar.name_legacy %}
+<section class="section publications-section">
+
+    <h2 class="section-title">
+        Publications
+    </h2>
+
+    <div class="publication-table">
+        {% for paper in publications %}
+        <div class="publication-table-row">
+            {% if paper.thumbnail_exist %}
+            <div class="publication-thumbnail-cell">
+                <img class="thumbnail"
+                src="{{ site.baseurl }}/assets/images/{{ paper.key }}-thumbnail.png"
+                alt="thumbnail"/>
+            </div>
+            {% endif %}
+
+            <div class="publication-description-cell">
+                <div class="publication-title" style="color: #0066cc;">
+                    <span aria-hidden="true" style="display:inline-block; width:50px; height:2px; background:#333; margin-right:8px; vertical-align:middle;"></span>
+                    {% comment %} Remove a leading quotation mark (straight or curly, single or double) from titles for display {% endcomment %}
+                    {% assign raw_title = paper.title | strip %}
+                    {% assign first_char = raw_title | slice: 0, 1 %}
+                    {% if first_char == '“' or first_char == '”' or first_char == '"' or first_char == "'" or first_char == '‘' or first_char == '’' %}
+                        {% assign display_title = raw_title | slice: 1, 2000 | strip %}
+                    {% else %}
+                        {% assign display_title = raw_title %}
+                    {% endif %}
+                    {% if paper.project_exist %}
+                        <a href="{{ site.baseurl }}/publications/{{ paper.key }}" target=_blank style="color: #0066cc; text-decoration: none;">{{ display_title }}</a>
+                    {% elsif paper.project %}
+                        <a href="{{ paper.project }}" target=_blank style="color: #0066cc; text-decoration: none;">{{ display_title }}</a>
+                    {% elsif paper.arXiv %}
+                        <a href="{{ paper.arXiv }}" target=_blank style="color: #0066cc; text-decoration: none;">{{ display_title }}</a>
+                    {% elsif paper.link %}
+                        <a href="{{ paper.link }}" target=_blank style="color: #0066cc; text-decoration: none;">{{ display_title }}</a>
+                    {% else %}
+                        <span style="color: #0066cc;">{{ display_title }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="publication-summary">
+                    {% assign author_names = "" | split: "/" %}
+                    {% for author in paper.authors %}
+                        {% if author.name contains my_name or author.name contains my_name_legacy %}
+                            {%- capture author_name -%}
+                                <b>{{ author.name }}</b>
+                            {%- endcapture -%}
+                        {% else %}
+                            {% if author.link %}
+                                {%- capture author_name -%}
+                                    <a href="{{ author.link }}" target=_blank>{{ author.name }}</a>
+                                {%- endcapture -%}
+                            {% else %}
+                                {%- capture author_name -%}
+                                    {{ author.name }}
+                                {%- endcapture -%}
+                            {% endif %}
+                        {% endif %}
+                        {% assign author_names = author_names | push: author_name %}
+                    {% endfor %}
+                    {{ author_names | join: ', ' }}
+
+                    {% if paper.authors_note %}
+                        (* {{ paper.authors_note }})
+                    {% endif %}
+                    <br>
+
+                    {{ paper.venue }}
+                    {% if paper.publication_note %}
+                        <b>({{ paper.publication_note }})</b>
+                    {% endif %}
+                    <br>
+
+                    {% if paper.project_exist %}
+                        <a href="{{ site.baseurl }}/publications/{{ paper.key }}" target=_blank>Project</a>&ensp;
+                    {% elsif paper.project %}
+                        <a href="{{ paper.project }}" target=_blank>Project</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.arXiv %}
+                        <a href="{{ paper.arXiv }}" target=_blank>arXiv</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.pdf_exist %}
+                        <a href="{{ site.baseurl }}/assets/files/{{ paper.key }}.pdf" target=_blank>PDF</a>&ensp;
+                    {% elsif paper.pdf %}
+                        <a href="{{ paper.pdf }}" target=_blank>PDF</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.slides_exist %}
+                        <a href="{{ site.baseurl }}/assets/files/{{ paper.key }}-slides.pptx" target=_blank>Slides</a>&ensp;
+                    {% elsif paper.slides %}
+                        <a href="{{ paper.slides }}" target=_blank>Slides</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.poster_exist %}
+                        <a href="{{ site.baseurl }}/assets/files/{{ paper.key }}-poster.pdf" target=_blank>Poster</a>&ensp;
+                    {% elsif paper.poster %}
+                        <a href="{{ paper.poster }}" target=_blank>Poster</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.video %}
+                        <a href="{{ paper.video }}" target=_blank>Video</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.web_demo %}
+                        <a href="{{ paper.web_demo }}" target=_blank>Web Demo</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.supplementary_exist %}
+                        <a href="{{ site.baseurl }}/assets/files/{{ paper.key }}-supplementary.pdf" target=_blank>Supplementary</a>&ensp;
+                    {% elsif paper.supplementary %}
+                        <a href="{{ paper.supplementary }}" target=_blank>Supplementary</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.code %}
+                        <a href="{{ paper.code }}" target=_blank>Code</a>&ensp;
+                    {% endif %}
+
+                    {% comment %} Only show Link button if paper.link exists but wasn't used to hyperlink the title {% endcomment %}
+                    {% assign title_is_linked_via_link = false %}
+                    {% unless paper.project_exist or paper.project or paper.arXiv or paper.title_link %}
+                        {% if paper.link %}
+                            {% assign title_is_linked_via_link = true %}
+                        {% endif %}
+                    {% endunless %}
+                    {% if paper.link and title_is_linked_via_link == false %}
+                        <a href="{{ paper.link }}" target=_blank>Link</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.hugging_face %}
+                        <a href="{{ paper.hugging_face }}" target=_blank>Hugging Face</a>&ensp;
+                    {% endif %}
+
+                    {% if paper.press_release %}
+                        {% for press_release in paper.press_release %}
+                            <a href="{{ press_release.link }}" target=_blank>Media {{ forloop.index }}</a>&ensp;
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if paper.etc %}
+                        {% for etc in paper.etc %}
+                            <a href="{{ etc.link }}" target=_blank>{{ etc.name }}</a>&ensp;
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div><!--//item-->
+        {% endfor %}
+    </div>
+
+</section><!--//section-->
